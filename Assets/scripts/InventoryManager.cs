@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager instance;
     public InventorySlots[] inventorySlots;
     public GameObject inventoryItemPrefab;
     public void AddItem(Item item)
@@ -16,8 +17,15 @@ public class InventoryManager : MonoBehaviour
                 return;
             }
         }
+    }
 
-        void SpawnNewItem(Item item, InventorySlots slot)
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
+    void SpawnNewItem(Item item, InventorySlots slot)
         {
             GameObject newItemGo = Instantiate(inventoryItemPrefab, slot.transform);
             InventoryItem inventoryItem = newItemGo.GetComponent<InventoryItem>();
@@ -31,4 +39,4 @@ public class InventoryManager : MonoBehaviour
 
 
 
-}
+
